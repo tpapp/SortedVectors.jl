@@ -25,7 +25,7 @@ end
 """
     SortedVector([lt], xs)
 
-Sort `xs` by `lt` (which defaults to `isless`) and wrap in a SortedVector.
+Sort `xs` by `lt` (which defaults to `isless`) and wrap in a SortedVector. For reverse sorting, use `!lt`.
 
     SortedVector(Val{:checksorted}(), lt, sorted_contents)
 
