@@ -43,7 +43,7 @@ function SortedVector(::CheckSorted, lt, sorted_contents::AbstractVector)
 end
 
 """
-    SortedVector([lt], xs)
+    SortedVector([lt=isless], xs)
 
 Sort `xs` by `lt` (which defaults to `isless`) and wrap in a SortedVector. For reverse sorting, use `!lt`.
 
