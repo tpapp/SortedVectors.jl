@@ -27,9 +27,11 @@ The only exported symbol is `SortedVector`. Use
 SortedVector([isless], xs)
 ```
 
-to sort `xs` and save the result in a vector. `xs` can be any `<: AbstractVector`. For immutable types (eg `StaticArrays.SVector` or `UnitRange`, `setindex!` will not work.
+to sort `xs` and save the result in a vector. `xs` can be any `<: AbstractVector`. For immutable types (eg `StaticArrays.SVector` or `UnitRange`), `setindex!` will not work.
 
-If your code emits sorted vectors, use the `SortedVector(Val{:assumesorted}, ...)` constructor. If your API accepts sorted vectors, and you want to check them, use the `SortedVector(Val{:checksorted}, ...)` constructor. In either case, you are responsible for ensuring that the argument vector is not modified later on.
+If your code emits sorted vectors, use the `SortedVector(Val{:assumesorted}, ...)` constructor. If your API accepts sorted vectors, and you want to check them, use the `SortedVector(Val{:checksorted}, ...)` constructor.
+
+**In either case, you are responsible for ensuring that the argument vector is not modified later on. `copy` if you are unsure.**
 
 ## Supported interfaces
 
