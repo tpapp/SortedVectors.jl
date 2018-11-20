@@ -21,6 +21,8 @@ pkg> add https://github.com/tpapp/SortedVectors.jl
 
 ## How to use
 
+### Standard constructor
+
 The only exported symbol is `SortedVector`. Use
 
 ```julia
@@ -28,6 +30,8 @@ SortedVector([lt=isless], xs)
 ```
 
 to sort `xs` and save the result in a vector. `xs` can be any `<: AbstractVector`. For immutable types (eg `StaticArrays.SVector` or `UnitRange`), `setindex!` will not work.
+
+### Special constructors for checking or skipping sorting
 
 If your code emits sorted vectors, use the
 ```julia
