@@ -31,4 +31,7 @@ using SortedVectors, Test
 
     @test parent(sv) ≡ sv.sorted_contents
     @test copy(sv) == sv
+
+    @test_throws ArgumentError SortedVector(SortedVectors.CheckSorted(), isless, [3, 1, 2])
+    @test SortedVector(SortedVectors.CheckSorted(), isless, [1, 2, 3]) == [1, 2, 3]
 end
