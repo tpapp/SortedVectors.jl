@@ -23,6 +23,12 @@ using SortedVectors, Test
     end
 
     @test_throws ArgumentError sv[1] = 7
+    @test_throws ArgumentError sv[3] = -1
     @test (sv[1] = 0) == 0
-    @test sv[:] == [0, 2, 3]
+    @test (sv[2] = 1) == 1
+    @test (sv[3] = 8) == 8
+    @test sv[:] == [0, 1, 8]
+
+    @test parent(sv) ≡ sv.sorted_contents
+    @test copy(sv) == sv
 end
