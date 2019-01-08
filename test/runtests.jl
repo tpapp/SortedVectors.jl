@@ -35,3 +35,8 @@ using SortedVectors, Test
     @test_throws ArgumentError SortedVector(SortedVectors.CheckSorted(), isless, [3, 1, 2])
     @test SortedVector(SortedVectors.CheckSorted(), isless, [1, 2, 3]) == [1, 2, 3]
 end
+
+@testset "search and cut" begin
+    sv = SortedVector(1:5)
+    @test cut.([1, 1.5, 2, 5, 6], Ref(sv)) == [0, 1, 1, 4, 5]
+end
