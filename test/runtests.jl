@@ -38,5 +38,5 @@ end
 
 @testset "search and cut" begin
     sv = SortedVector(1:5)
-    @test cut.([1, 1.5, 2, 5, 6], Ref(sv)) == [0, 1, 1, 4, 5]
+    @test SortedVectors.cut.([1, 1.5, 2, 5, 6], Ref(sv)) == [0, 1, 1, 4, 5]
 end

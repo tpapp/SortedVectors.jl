@@ -1,6 +1,6 @@
 module SortedVectors
 
-export SortedVector, cut
+export SortedVector
 
 using ArgCheck: @argcheck
 using DocStringExtensions: SIGNATURES
