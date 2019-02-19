@@ -13,10 +13,10 @@ A very lightweight Julia package to declare that a vector is sorted.
 
 ## Installation
 
-The package is not (yet) registered. Install with
+Type `]` to enter `pkg` mode, and install with
 
 ```julia
-pkg> add https://github.com/tpapp/SortedVectors.jl
+pkg> add SortedVectors
 ```
 
 ## How to use
