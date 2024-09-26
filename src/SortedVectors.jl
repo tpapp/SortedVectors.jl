@@ -5,7 +5,6 @@ export SortedVector
 using ArgCheck: @argcheck
 using DocStringExtensions: SIGNATURES
 using Lazy: @forward
-using Parameters: @unpack
 
 """
 Flag for indicating that
@@ -78,7 +77,7 @@ Base.parent(sv::SortedVector) = sv.sorted_contents
 Base.IndexStyle(::Type{<:SortedVector}) = Base.IndexLinear()
 
 function Base.setindex!(sv::SortedVector, x, i::Integer)
-    @unpack lt, sorted_contents = sv
+    (; lt, sorted_contents) = sv
     a, b = firstindex(sorted_contents), lastindex(sorted_contents)
     a < i ≤ b && @argcheck lt(sorted_contents[i-1], x)
     a ≤ i < b && @argcheck lt(x, sorted_contents[i+1])
