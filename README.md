@@ -14,36 +14,36 @@ The package is registered. Type `]` to enter `pkg` mode, and install with
 pkg> add SortedVectors
 ```
 
-## How to use
+## Documentation
 
-### Standard constructor
+See the docstring for `SortedVector`, the only exported symbol.
 
-The only exported symbol is `SortedVector`. Use
+## Example
+    
+``` julia
+julia> using SortedVectors
 
-```julia
-SortedVector([lt=isless], xs)
+julia> sv = SortedVector([1, 3, 4])
+3-element SortedVector{Int64, Vector{Int64}, Base.Order.ForwardOrdering}:
+ 1
+ 3
+ 4
+
+julia> sv[2]
+3
+
+julia> 2 ∈ sv
+false
+
+julia> sv[2] = 7
+ERROR: ArgumentError: Order.lt(order, x, sorted_contents[i + 1]) must hold. Got
+Order.lt => lt
+order => ForwardOrdering()
+x => 7
+sorted_contents[i + 1] => 4
+Stacktrace:
+ [1] throw_check_error(info::Any)
+   @ ArgCheck ~/.julia/packages/ArgCheck/CA5vv/src/checks.jl:280
+ [2] setindex!(sorted_vector::SortedVector{Int64, Vector{Int64}, Base.Order.ForwardOrdering}, x::Int64, i::Int64)
+   @ SortedVectors ~/code/julia/SortedVectors/src/SortedVectors.jl:104
 ```
-
-to sort `xs` and save the result in a vector. `xs` can be any `<: AbstractVector`. For immutable types (eg `StaticArrays.SVector` or `UnitRange`), `setindex!` will not work.
-
-### Special constructors for checking or skipping sorting
-
-If your code emits sorted vectors, use the
-```julia
-SortedVector(SortedVectors.AssumeSorted(), lt, sorted_contents)
-```
-constructor. This will skip checks.
-
-If your API accepts sorted vectors, and you want to check them, use the
-```julia
-SortedVector(SortedVectors.CheckSorted(), lt, sorted_contents)
-```
-constructor.
-
-**In either case, you are responsible for ensuring that the argument vector is not modified later on. `copy` if you are unsure.**
-
-## Supported interfaces
-
-### [`AbstractVector`](https://docs.julialang.org/en/v1/manual/interfaces/#man-interface-array-1)
-
-`setindex!` verifies that sorting is maintained.
