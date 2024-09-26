@@ -45,9 +45,11 @@ end
     @test SortedVectors.cut.(xs, Ref(sv), false) == [0, 1, 1, 2, 5, 5]
 end
 
-using JET
-@testset "static analysis with JET.jl" begin
-    @test isempty(JET.get_reports(report_package(SortedVectors, target_modules=(SortedVectors,))))
+if VERSION ≥ v"1.10"            # JET fails on old versions
+    using JET
+    @testset "static analysis with JET.jl" begin
+        @test isempty(JET.get_reports(report_package(SortedVectors, target_modules=(SortedVectors,))))
+    end
 end
 
 @testset "QA with Aqua" begin
