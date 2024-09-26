@@ -4,7 +4,6 @@ export SortedVector
 
 using ArgCheck: @argcheck
 using DocStringExtensions: SIGNATURES
-using Lazy: @forward
 
 """
 Flag for indicating that
@@ -72,7 +71,12 @@ Base.parent(sv::SortedVector) = sv.sorted_contents
 #### array interface
 ####
 
-@forward SortedVector.sorted_contents (Base.size, Base.getindex, Base.length, Base.axes)
+for f in (:size, :getindex, :length, :axes)
+    # call the same function on the field
+    @eval function Base.$f(sorted_vector::SortedVector, args...)
+        $f(sorted_vector.sorted_contents, args...)
+    end
+end
 
 Base.IndexStyle(::Type{<:SortedVector}) = Base.IndexLinear()
 
