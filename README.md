@@ -14,6 +14,14 @@ The package is registered. Type `]` to enter `pkg` mode, and install with
 pkg> add SortedVectors
 ```
 
+## Features
+
+- lightweight wrapper
+- customizable order (any `Base.Order.Ordering`)
+- constructor sorts argument by default, this can be skipped, or just verified
+- `setindex!` checks that order is maintained
+- fast implementation for `in`
+
 ## Documentation
 
 See the docstring for `SortedVector`, the only exported symbol.
