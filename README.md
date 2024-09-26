@@ -1,19 +1,14 @@
 # SortedVectors
 
-![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)<!--
-![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-retired-orange.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-archived-red.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-dormant-blue.svg) -->
-[![Build Status](https://travis-ci.com/tpapp/SortedVectors.jl.svg?branch=master)](https://travis-ci.com/tpapp/SortedVectors.jl)
+![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
+[![build](https://github.com/tpapp/SortedVectors.jl/workflows/CI/badge.svg)](https://github.com/tpapp/SortedVectors.jl/actions?query=workflow%3ACI)
 [![codecov.io](http://codecov.io/github/tpapp/SortedVectors.jl/coverage.svg?branch=master)](http://codecov.io/github/tpapp/SortedVectors.jl?branch=master)
 
 A very lightweight Julia package to declare that a vector is sorted.
 
 ## Installation
 
-Type `]` to enter `pkg` mode, and install with
+The package is registered. Type `]` to enter `pkg` mode, and install with
 
 ```julia
 pkg> add SortedVectors

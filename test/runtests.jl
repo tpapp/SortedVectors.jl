@@ -40,3 +40,17 @@ end
     sv = SortedVector(1:5)
     @test SortedVectors.cut.([1, 1.5, 2, 5, 6], Ref(sv)) == [0, 1, 1, 4, 5]
 end
+
+## NOTE add JET to the test environment, then uncomment
+# using JET
+# @testset "static analysis with JET.jl" begin
+#     @test isempty(JET.get_reports(report_package(SortedVectors, target_modules=(SortedVectors,))))
+# end
+
+## NOTE add Aqua to the test environment, then uncomment
+# @testset "QA with Aqua" begin
+#     import Aqua
+#     Aqua.test_all(SortedVectors; ambiguities = false)
+#     # testing separately, cf https://github.com/JuliaTesting/Aqua.jl/issues/77
+#     Aqua.test_ambiguities(SortedVectors)
+# end
