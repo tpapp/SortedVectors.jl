@@ -31,26 +31,28 @@ using SortedVectors, Test
 
     @test parent(sv) ≡ sv.sorted_contents
     @test copy(sv) == sv
+    @test sv.order == Base.Order.Forward # field access is API
 
-    @test_throws ArgumentError SortedVector(SortedVectors.CheckSorted(), isless, [3, 1, 2])
-    @test SortedVector(SortedVectors.CheckSorted(), isless, [1, 2, 3]) == [1, 2, 3]
+    @test_throws ArgumentError SortedVector(SortedVectors.CheckSorted(), [3, 1, 2],
+                                            Base.Order.Reverse)
+    @test SortedVector(SortedVectors.CheckSorted(), [1, 2, 3]) == [1, 2, 3]
 end
 
 @testset "search and cut" begin
     sv = SortedVector(1:5)
-    @test SortedVectors.cut.([1, 1.5, 2, 5, 6], Ref(sv)) == [0, 1, 1, 4, 5]
+    xs = [0.5, 1, 1.5, 2, 5, 6]
+    @test SortedVectors.cut.(xs, Ref(sv)) == [0, 0, 1, 1, 4, 5]
+    @test SortedVectors.cut.(xs, Ref(sv), false) == [0, 1, 1, 2, 5, 5]
 end
 
-## NOTE add JET to the test environment, then uncomment
-# using JET
-# @testset "static analysis with JET.jl" begin
-#     @test isempty(JET.get_reports(report_package(SortedVectors, target_modules=(SortedVectors,))))
-# end
+using JET
+@testset "static analysis with JET.jl" begin
+    @test isempty(JET.get_reports(report_package(SortedVectors, target_modules=(SortedVectors,))))
+end
 
-## NOTE add Aqua to the test environment, then uncomment
-# @testset "QA with Aqua" begin
-#     import Aqua
-#     Aqua.test_all(SortedVectors; ambiguities = false)
-#     # testing separately, cf https://github.com/JuliaTesting/Aqua.jl/issues/77
-#     Aqua.test_ambiguities(SortedVectors)
-# end
+@testset "QA with Aqua" begin
+    import Aqua
+    Aqua.test_all(SortedVectors; ambiguities = false)
+    # testing separately, cf https://github.com/JuliaTesting/Aqua.jl/issues/77
+    Aqua.test_ambiguities(SortedVectors)
+end
