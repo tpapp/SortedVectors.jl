@@ -122,7 +122,7 @@ end
 function Base.in(x, sorted_vector::SortedVector)
     (; sorted_contents, order) = sorted_vector
     i = searchsortedfirst(sorted_contents, x, order)
-    i ≢ nothing && sorted_contents[i] == x
+    i ≤ lastindex(sorted_contents) && sorted_contents[i] == x
 end
 
 
