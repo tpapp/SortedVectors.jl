@@ -43,6 +43,17 @@ end
     xs = [0.5, 1, 1.5, 2, 5, 6]
     @test SortedVectors.cut.(xs, Ref(sv)) == [0, 0, 1, 1, 4, 5]
     @test SortedVectors.cut.(xs, Ref(sv), false) == [0, 1, 1, 2, 5, 5]
+
+    for x in xs
+        @test x ∈ xs
+        @test x .+ 0.1 ∉ xs
+        @test x .- 0.1 ∉ xs
+    end
+
+    ys = SortedVector(1:6)
+    for i in 0:7
+        @test (i ∈ ys) == (1 ≤ i ≤ 6)
+    end
 end
 
 if VERSION ≥ v"1.10"            # JET fails on old versions
